@@ -64,7 +64,7 @@ TEST(vectorFunctionsTest, vectorProd) {
     EXPECT_EQ(scalarProd(b, result), 0);
 }
 
-TEST(triangleArea, invalidInput) {
+TEST(triangleAreaTest, invalidInput) {
     Point p1 = randPoint(-10, 10);
     Point p2 = randPoint(-10, 10);
     Point p3 = randPoint(-10, 10);
@@ -73,10 +73,41 @@ TEST(triangleArea, invalidInput) {
     EXPECT_EQ(triangleArea(&p1, &p2, NULL), -1);
 }
 
-TEST(triangleArea, areaCheck) {
+TEST(triangleAreaTest, areaCheck) {
     Point p1 = {-1, -1, -1};
     Point p2 = {1, 2, 3};
     Point p3 = {9, 8, 7};
     double result = 0.5 * sqrt(864);
     EXPECT_EQ(triangleArea(&p1, &p2, &p3), result);
+}
+
+TEST(MinAreaTest, minAreaCheck) {
+    const int nPoints = 4;
+    double arrPoints[4][3] = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {9, 7, 5},
+            {-1, -3, -5}
+    };
+    double result = 11.022704;
+
+    Point ** points = (Point**)malloc(nPoints * sizeof(Point*));
+    for (int i = 0; i < nPoints; i++) {
+        points[i] = (Point*)malloc(sizeof(Point));
+
+        points[i]->x = arrPoints[i][0];
+        points[i]->y = arrPoints[i][1];
+        points[i]->z = arrPoints[i][2];
+    }
+
+    double * temp = EdgeMinArea(points, nPoints);
+    EXPECT_TRUE(fabs(result - *temp) < 0.0001);
+    free(points);
+}
+
+TEST(MinAreaTest, invalidInput) {
+    const int nPoints = 4;
+    Point ** points = NULL;
+    EXPECT_EQ(EdgeMinArea(points, nPoints), NULL);
+    EXPECT_EQ(EdgeMinArea(points, 3), NULL);
 }

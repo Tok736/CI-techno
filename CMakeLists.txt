@@ -14,7 +14,6 @@ include_directories(include)
 add_library(lib STATIC src/tetra.c)
 
 add_executable(${PROJECT_NAME} src/main.c)
-#add_executable(${PROJECT_NAME} src/tetra.c test/test.cpp)
 target_link_libraries(${PROJECT_NAME} lib m)
 
 enable_testing()

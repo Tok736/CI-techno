@@ -25,20 +25,20 @@ double triangleArea(const Point *const p1, const Point *const p2, const Point *c
     return vectorLength(vectorProd(p1p2, p1p3)) / 2;
 }
 
-double * EdgeMinArea(const Point **const points, int nPoints) {
+double * EdgeMinArea(Point **const points, const int nPoints) {
+    if (nPoints < 4) return NULL;
     if (!points) return NULL;
     double * minArea = (double*)malloc(sizeof(double));
     if (!minArea) return NULL;
 
 
-    *minArea = triangleArea(points[0], points[1], points[2]);
+    double tempArea = triangleArea(points[0], points[1], points[2]);;
+    *minArea = tempArea;
     for (int i = 0; i < nPoints - 2; i++) {
         for (int j = i + 1; j < nPoints - 1; j++) {
             for (int k = j + 1; k < nPoints; k++) {
-                printf("%d, %d, %d\n", i, j, k);
-                double tempArea = triangleArea(points[i], points[j], points[k]);
+                tempArea = triangleArea(points[i], points[j], points[k]);
                 if (tempArea < *minArea) *minArea = tempArea;
-                printf("tempArea = %f\n", tempArea);
             }
         }
     }
@@ -46,19 +46,26 @@ double * EdgeMinArea(const Point **const points, int nPoints) {
     return minArea;
 }
 
-Point ** generatePoints(int nPoints, int down, int up) {
+Point ** inputPoints(const int nPoints) {
     Point ** points = (Point**)malloc(nPoints * sizeof(Point*));
     if (!points) return NULL;
     for (int i = 0; i < nPoints; i++) {
         points[i] = (Point*)malloc(sizeof(Point));
         if (!points[i]) return NULL;
+        printf("Enter x, y and z coordinates for %d point:\n", i + 1);
+        double x = 1, y, z;
 
-        points[i]->x = rand() % (up - down) + down;
-        points[i]->y = rand() % (up - down) + down;
-        points[i]->z = rand() % (up - down) + down;
+        // Trying to get coordinates while input incorrect
+        while (scanf("%lf %lf %lf", &x, &y, &z) != 3)
+            scanf("%*s");
+
+        points[i]->x = x;
+        points[i]->y = y;
+        points[i]->z = z;
     }
     return points;
 }
+
 
 void freePoints(Point ** points, int nPoints) {
     for (int i = 0; i < nPoints; i++) {
@@ -67,12 +74,3 @@ void freePoints(Point ** points, int nPoints) {
     free(points);
 }
 
-void printPoints(const Point **const points, int nPoints) {
-    if (!points) return;
-    for (int i = 0; i < nPoints; i++) {
-        if (!points[i]) return;
-        if (i != 0) printf(", ");
-        printf("(%.1f, %.1f, %.1f)", points[i]->x, points[i]->y, points[i]->z);
-    }
-    printf("\n");
-}

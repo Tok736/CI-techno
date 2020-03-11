@@ -16,8 +16,8 @@ Vector vectorProd(const Vector v1, const Vector v2);
 double vectorLength(const Vector v);
 double triangleArea(const Point *const p1, const Point *const p2, const Point *const p3);
 
-double * EdgeMinArea(const Point ** const points, int nPoints);
-Point ** generatePoints(int nPoints, int down, int up);
+double * EdgeMinArea(Point ** const points, const int nPoints);
+Point ** inputPoints(const int nPoints);
 void freePoints(Point ** points, int nPoints);
 
 #endif //CI_TECHNO_TETRA_H

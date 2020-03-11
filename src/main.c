@@ -17,15 +17,15 @@ const int amountOfPoints = 4;
 int main() {
     srand(time(0));
 
-    int downEgde = -20, upEdge = 20;
-    Point ** points = generatePoints(amountOfPoints, downEgde, upEdge);
+
+    Point ** points = inputPoints(amountOfPoints);
     if (!points) return 0;
-    printPoints(points, amountOfPoints);
     double * minArea = EdgeMinArea(points, amountOfPoints);
     if (!minArea) return 0;
-    printf("Minimal area = %.3f", *minArea);
+    printf("Minimal area = %f", *minArea);
 
     freePoints(points, amountOfPoints);
+    free(minArea);
 
     return 0;
 }
