@@ -24,8 +24,8 @@ matrix:
         apt:
           packages:
             - cmake
-            - gcc-7
-            - g++-7
+            - gcc
+            - g++
             - valgrind
             - lcov
             - cppcheck
