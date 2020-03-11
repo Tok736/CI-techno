@@ -30,16 +30,15 @@ before_install:
   - pip install --user cpp-coveralls
 
 script:
-  - pip install --user cpp-coveralls
   - export CXX=/usr/bin/g++-7
   - export C=/usr/bin/gcc-7
   - mkdir -p build
   - cd build
   - cmake ..
   - make
+  - ctest --output-on-failure
   - valgrind --tool=memcheck --leak-check=full --leak-resolution=med ./test/runTest
   - cppcheck --enable=all --std=c11 --check-config --suppress=missingIncludeSystem -I ../include ../src
-  - ctest --output-on-failure
 
 after_success:
   - echo "SUCCESS"

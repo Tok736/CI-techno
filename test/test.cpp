@@ -107,7 +107,7 @@ TEST(MinAreaTest, minAreaCheck) {
 
 TEST(MinAreaTest, invalidInput) {
     const int nPoints = 4;
-    Point ** points = NULL;
-    EXPECT_EQ(EdgeMinArea(points, nPoints), NULL);
-    EXPECT_EQ(EdgeMinArea(points, 3), NULL);
+    Point ** points = nullptr;
+    EXPECT_EQ(EdgeMinArea(points, nPoints), nullptr);
+    EXPECT_EQ(EdgeMinArea(points, 3), nullptr);
 }

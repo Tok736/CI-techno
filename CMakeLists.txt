@@ -10,7 +10,6 @@ set(CMAKE_EXE_LINKER_FLAGS "-lgcov --coverage")
 include_directories(include)
 
 
-
 add_library(lib STATIC src/tetra.c)
 
 add_executable(${PROJECT_NAME} src/main.c)
