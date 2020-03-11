@@ -20,6 +20,7 @@ double vectorLength(const Vector v) {
 }
 
 double triangleArea(const Point *const p1, const Point *const p2, const Point *const p3) {
+    if (!p1 || !p2 || !p3) return -1;
     Vector p1p2 = makeVectorAB(*p1, *p2), p1p3 = makeVectorAB(*p1, *p3);
     return vectorLength(vectorProd(p1p2, p1p3)) / 2;
 }

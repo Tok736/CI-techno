@@ -64,4 +64,19 @@ TEST(vectorFunctionsTest, vectorProd) {
     EXPECT_EQ(scalarProd(b, result), 0);
 }
 
+TEST(triangleArea, invalidInput) {
+    Point p1 = randPoint(-10, 10);
+    Point p2 = randPoint(-10, 10);
+    Point p3 = randPoint(-10, 10);
+    EXPECT_EQ(triangleArea(NULL, &p2, &p3), -1);
+    EXPECT_EQ(triangleArea(&p1, NULL, &p3), -1);
+    EXPECT_EQ(triangleArea(&p1, &p2, NULL), -1);
+}
 
+TEST(triangleArea, areaCheck) {
+    Point p1 = {-1, -1, -1};
+    Point p2 = {1, 2, 3};
+    Point p3 = {9, 8, 7};
+    double result = 0.5 * sqrt(864);
+    EXPECT_EQ(triangleArea(&p1, &p2, &p3), result);
+}
