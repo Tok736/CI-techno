@@ -44,7 +44,7 @@ script:
   - cd build
   - cmake ..
   - make
-#  - ctest
+  - ctest --output-on-failure
 
 after_success:
   - echo "SUCCESS"
