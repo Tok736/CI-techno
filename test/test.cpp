@@ -81,7 +81,7 @@ TEST(triangleAreaTest, areaCheck) {
     EXPECT_EQ(triangleArea(&p1, &p2, &p3), result);
 }
 
-TEST(MinAreaTest, minAreaCheck) {
+TEST(minAreaTest, minAreaCheck) {
     const int nPoints = 4;
     double arrPoints[4][3] = {
             {1, 2, 3},
@@ -101,13 +101,71 @@ TEST(MinAreaTest, minAreaCheck) {
     }
 
     double * temp = EdgeMinArea(points, nPoints);
+    freePoints(points, nPoints);
     EXPECT_TRUE(fabs(result - *temp) < 0.0001);
-    free(points);
 }
 
-TEST(MinAreaTest, invalidInput) {
+TEST(minAreaTest, invalidInput) {
     const int nPoints = 4;
     Point ** points = nullptr;
     EXPECT_EQ(EdgeMinArea(points, nPoints), nullptr);
     EXPECT_EQ(EdgeMinArea(points, 3), nullptr);
+}
+
+TEST(inputPointsTest, correctInput) {
+    const int nPoints = 12;
+    const double data[nPoints][3] = {
+            {1, 2, 3},
+            {10, 9, 8},
+            {4.5, 6.3, 8.1},
+            {-1, -3, 0}
+    };
+    FILE * file = fopen("correct.txt", "w+");
+    for (int i = 0;i < nPoints; i++) {
+        for (int j = 0; j < 3; j++) {
+            fprintf(file, "%lf ", data[i][j]);
+        }
+    }
+    fclose(file);
+
+    freopen("correct.txt", "r", stdin);
+
+    Point ** points = inputPoints(nPoints);
+
+    for (int i = 0; i < nPoints; i++) {
+        EXPECT_EQ(data[i][0], points[i]->x);
+        EXPECT_EQ(data[i][1], points[i]->y);
+        EXPECT_EQ(data[i][2], points[i]->z);
+    }
+    freePoints(points, nPoints);
+}
+
+TEST(inputPointsTest, incorrectInput) {
+    srand(time(0));
+    const int nPoints = 12;
+    const double data[nPoints][3] = {
+            {1, 2, 3},
+            {10, 9, 8},
+            {4.5, 6.3, 8.1},
+            {-1, -3, 0}
+    };
+    FILE * file = fopen("correct.txt", "w+");
+    for (int i = 0;i < nPoints; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (rand() % 3 == 0) fprintf(file, "afdsjj ");
+            fprintf(file, "%lf ", data[i][j]);
+        }
+    }
+    fclose(file);
+
+    freopen("correct.txt", "r", stdin);
+
+    Point ** points = inputPoints(nPoints);
+
+    for (int i = 0; i < nPoints; i++) {
+        EXPECT_EQ(data[i][0], points[i]->x);
+        EXPECT_EQ(data[i][1], points[i]->y);
+        EXPECT_EQ(data[i][2], points[i]->z);
+    }
+    freePoints(points, nPoints);
 }
