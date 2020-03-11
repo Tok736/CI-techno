@@ -3,8 +3,8 @@ set(PROJECT_NAME CI-techno)
 project(${PROJECT_NAME})
 
 
-SET(CMAKE_C_FLAGS  "-lm")
 set(CMAKE_C_STANDARD 11)
+SET(CMAKE_C_FLAGS  "-lm")
 
 include_directories(include)
 

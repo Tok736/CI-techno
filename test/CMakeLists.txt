@@ -1,16 +1,15 @@
 cmake_minimum_required(VERSION 3.9)
 project(tests)
 
-find_package(GTest REQUIRED)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 include_directories(../include)
 
 
-add_executable(tests test.cpp)
+add_executable(Google_Tests_run test.cpp)
 
-target_link_libraries(tests gtest gtest_main lib)
+target_link_libraries(Google_Tests_run gtest gtest_main lib)
 
 add_test(
-        NAME runTest
-        COMMAND runTest
+        NAME Google_Tests_run
+        COMMAND Google_Tests_run
 )
