@@ -4,7 +4,8 @@ project(${PROJECT_NAME})
 
 
 set(CMAKE_C_STANDARD 11)
-SET(CMAKE_C_FLAGS  "-lm")
+SET(CMAKE_C_FLAGS  "-lm -fprofile-arcs -ftest-coverage -lgcov")
+set(CMAKE_EXE_LINKER_FLAGS "-lgcov --coverage")
 
 include_directories(include)
 

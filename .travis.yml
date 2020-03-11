@@ -43,4 +43,6 @@ script:
 
 after_success:
   - echo "SUCCESS"
+  - coveralls --root .. --build-root . -E ".*CMakeFiles.*" -E ".*googletest*" --gcov /usr/bin/gcov --gcov-options '\-lp'
+
 
