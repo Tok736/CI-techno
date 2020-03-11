@@ -13,24 +13,17 @@ os:
 compiler:
   - gcc
 
-matrix:
-  include:
-    - os: linux
-      dist: trusty
-      sudo: true
-      compiler: gcc
-
-      addons:
-        apt:
-          packages:
-            - cmake
-            - gcc
-            - g++
-            - valgrind
-            - lcov
-            - cppcheck
-          sources:
-            - ubuntu-toolchain-r-test
+addons:
+  apt:
+    packages:
+      - gcc-7
+      - g++-7
+      - cmake
+      - valgrind
+      - lcov
+      - cppcheck
+    sources:
+      - ubuntu-toolchain-r-test
 
 before_install:
   - sudo apt-get -y install valgrind
