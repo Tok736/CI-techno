@@ -27,9 +27,8 @@ matrix:
             - gcc-7
             - g++-7
             - valgrind
-            - python-yaml
             - lcov
-            - valgrind
+            - cppcheck
           sources:
             - ubuntu-toolchain-r-test
 
@@ -38,12 +37,15 @@ before_install:
   - pip install --user cpp-coveralls
 
 script:
+  - pip install --user cpp-coveralls
   - export CXX=/usr/bin/g++-7
   - export C=/usr/bin/gcc-7
-  - mkdir build
+  - mkdir -p build
   - cd build
   - cmake ..
   - make
+  - valgrind --tool=memcheck --leak-check=full --leak-resolution=med ./test/matrix_test
+  - cppcheck --enable=all --std=c11 --check-config --suppress=missingIncludeSystem -I ../include ../src
   - ctest --output-on-failure
 
 after_success:
