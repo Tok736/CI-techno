@@ -74,3 +74,4 @@ void freePoints(Point ** points, int nPoints) {
     free(points);
 }
 
+

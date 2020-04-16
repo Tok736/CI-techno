@@ -11,6 +11,8 @@ typedef struct Vector {
     double x, y, z;
 } Vector;
 
+void printVec(const Vector v);
+
 Vector makeVectorAB(const Point A, const Point B);
 Vector vectorProd(const Vector v1, const Vector v2);
 double vectorLength(const Vector v);

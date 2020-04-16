@@ -27,6 +27,8 @@ int main() {
     freePoints(points, amountOfPoints);
     free(minArea);
 
+
+
     return 0;
 }
 
